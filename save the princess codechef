@@ -1,0 +1,163 @@
+// Problem: Save The Princess
+// Contest: CodeChef - Practice(Easy)
+// URL: https://www.codechef.com/problems/SHIRO
+// Memory Limit: 256 MB
+// Time Limit: 1000 ms
+// 
+// Powered by CP Editor (https://cpeditor.org)
+
+// #include<bits/stdc++.h>
+#include<iostream>
+#include<map>
+#include<unordered_map>
+#include <iomanip> 
+#include<set>
+#include<unordered_set>
+#include<vector>
+#include<queue>
+#include<list>
+#include<string>
+#include<string.h>
+#include<algorithm>
+#include<utility>
+#include<math.h>
+#include<stack>
+using namespace std;
+#define IOS ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+             #define  int   long long int
+#define d1(x)                cout<<#x<<": "<<x<<endl
+#define d2(x, y)             cout<<#x<<": "<<x<<" | "<<#y<<": "<<y<<endl
+#define d3(x, y, z)          cout<<#x<<":" <<x<<" | "<<#y<<": "<<y<<" | "<<#z<<": "<<z<<endl
+#define d4(a, b, c, d)       cout<<#a<<": "<<a<<" | "<<#b<<": "<<b<<" | "<<#c<<": "<<c<<" | "<<#d<<": "<<d<<endl
+#define d5(a, b, c, d, e)    cout<<#a<<": "<<a<<" | "<<#b<<": "<<b<<" | "<<#c<<": "<<c<<" | "<<#d<<": "<<d<<" | "<<#e<< ": "<<e<<endl
+#define d6(a, b, c, d, e, f) cout<<#a<<": "<<a<<" | "<<#b<<": "<<b<<" | "<<#c<<": "<<c<<" | "<<#d<<": "<<d<<" | "<<#e<< ": "<<e<<" | "<<#f<<": "<<f<<endl
+
+        /*SOME SHORTCUTS*/    
+
+#define f(i,a,b) for(int i=a;i<b;i++)
+#define fr(i,a,b) for(int i=a;i>=b;i--)
+#define lb lower_bound
+#define ub upper_bound
+#define ll long long int
+#define pb push_back
+#define pf push_front
+#define lcm(a, b) ((a) * (b)) / __gcd(a, b)
+#define mp make_pair
+#define in insert
+#define fi first
+#define se second
+#define all(v) (v).begin(),(v).end()
+// #define memset(a) memset(a,0,sizeof(a))
+const int MOD = 1e9 + 7;
+const int mod = 1e9 + 7;
+int cnt1=0,cnt2=0,cnt3=0,cnt4=0,cnt5=0,ans1=0,ans2=0,ans3=0;
+// bool prime[2000001];
+bool prime[1000001];
+/*int f[400005],inverse[400005];
+int divide(int n) 
+{return pow1(n,mod-2); } 
+
+int ncr(int n, int r) 
+{if(n<r) return 0;return (f[n]*((divide(f[r]) * divide(f[n-r])) % mod)) % mod; } */
+
+bool comp(string s1, string s2){
+    if(s1.size()>s2.size()){
+        return true;
+    }
+    else if(s1.size()<s2.size()){
+        return false;
+    }
+    else{
+        if(s1>s2){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+}
+void sieve() {
+	 
+	memset(prime, true, sizeof(prime));	
+	for (int i = 2; i * i <= 1000000; i++)
+	if (prime[i])	
+		for (int j = i * i; j <= 1000000; j+= i)
+			prime[j] = false;
+	prime[0] = prime[1] = false;
+	
+}
+int n;
+int a[105];int p[105];
+double fin=(double)0;
+map< pair < int ,pair <double ,double > > ,double > mp1;
+map< pair < int ,pair <double ,double > > ,int > mp2;
+int min1,sum1;
+double dp[105][10005];
+double find1(int i,int s1){
+	if(dp[i][s1]!=-1){
+		return dp[i][s1];
+	}
+	if(i==n){
+		if(s1>=min1){
+			// d1(n1);
+			// fin+=n1;
+			double aa1=(double(s1)/double(sum1));
+			return (double)1;
+		}
+		else{
+			return (double)0;
+		}
+	}
+	int a1=a[i];int a2=p[i];
+	int z1=(s1+a1);
+	int z2=(s1);
+	double k1=(double(a2)/double(100));
+	double k3=(double(1)-k1);
+	double k2=(k1);
+	double k4=((k3));
+	double f1=(double)0;
+	f1=((k1)*find1(i+1,z1));
+	// d2(f1,i);
+	f1+=((k3)*find1(i+1,z2));
+	// d2(f1,i);
+	// mp1[p1]=f1;mp2[p1]=1;
+	dp[i][s1]=f1;
+	// d3(i,s1,dp[i][s1]);
+	return dp[i][s1]=f1;
+}
+void solve(){
+	cin>>n;
+	fin=(double)0;
+	mp1.clear();
+	mp2.clear();
+	sum1=0;
+	// memset(dp,-1,sizeof(dp));
+	f(i,0,n){
+		cin>>a[i];
+		sum1+=a[i];
+	}
+	f(i,0,105){
+		f(j,0,sum1+3){
+			dp[i][j]=-1;
+		}
+	}
+	min1=(sum1/2);
+	min1+=(1&sum1);
+	f(i,0,n){
+		cin>>p[i];
+	}
+	double z1=find1(0,0);
+	// d1(z1);
+	cout<<fixed<<setprecision(7)<<z1<<endl;
+	// cout<<dp[0]
+}
+signed main(){
+	//sieve();
+	IOS;
+	int t=1;
+	cin>>t;
+	while(t--){
+		solve();
+	}
+	return 0;
+}
